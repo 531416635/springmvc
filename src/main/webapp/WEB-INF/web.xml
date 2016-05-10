@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>Archetype Created Web Application</display-name>
+	<!-- spring mvc前端控制器 -->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<!--指定springmvc配置的加载位置，如果不指定则默认加载WEB-INF/[DispatcherServlet 的Servlet 名字]-servlet.xml。 -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+		<!-- load-on-startup：表示servlet随服务启动 -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- 
+	servlet拦截方式：
+	1、拦截固定后缀的URL，比如设置*.do,*.action,此方法最简单不会导致静态资源被拦截。
+	2、拦截所有的URL，设置为/,此方法可以实现REST风格的URL，但是静态资源文件需要特殊处理。
+	3、拦截所有的URL,设置为/*,此方法设置错误，因为请求到action，当action转到jsp时会再次被拦截，提示不能根据jsp路径映射成功
+	 -->
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<!-- 请交给DispatcherServlet处理 -->
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
