@@ -16,7 +16,7 @@
 	<!-- 配置处理器、适配器、映射器的方式一：自动配置  start	 推荐这种方式-->
 <!-- controller注解,多个包中间使用半角逗号分隔 ,使用此组件扫描器，省去了配置繁琐的映射器和适配器 @controller-->
 <context:component-scan base-package="com.yao.controller"/>
-<!-- 自动注解适配器和映射器 1 @RequestMapping	 推荐这种方式-->
+<!-- 自动注解适配器和映射器 1 @RequestMapping （推荐这种方式）自动加载RequestMappingHandlerMapping和RequestMappingHandlerAdapter-->
 <mvc:annotation-driven />
 <!-- 自动注解适配器和映射器 2 @RequestMapping-->
 <!--注解适配器 -->
