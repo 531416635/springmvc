@@ -13,7 +13,21 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 
-<!-- 处理器配置,即controller配置 -->
+	<!-- 配置处理器、适配器、映射器的方式一：自动配置  start	 推荐这种方式-->
+<!-- controller注解,多个包中间使用半角逗号分隔 ,使用此组件扫描器，省去了配置繁琐的映射器和适配器 @controller-->
+<context:component-scan base-package="com.yao.controller"/>
+<!-- 自动注解适配器和映射器 1 @RequestMapping	 推荐这种方式-->
+<mvc:annotation-driven />
+<!-- 自动注解适配器和映射器 2 @RequestMapping-->
+<!--注解适配器 -->
+<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+<!--注解映射器 -->
+<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+	
+ 	<!-- 配置处理器、适配器、映射器的方式一：自动配置   end-->
+ 	
+	<!-- 配置处理器、适配器、映射器的方式二：手动配置   start-->
+<!-- 处理器,即controller配置 -->
 <!-- name="/items1.action"：前边配置的处理器映射器为BeanNameUrlHandlerMapping，
 如果请求的URL 为“上下文/items1.action”将会成功映射到ItemList1控制器。 -->
 <bean name="/items1name.action" id="itemList1" class="com.yao.controller.ItemList1"/>	
@@ -45,7 +59,7 @@
 		</props>
 	</property>
 </bean>
-
+	<!-- 配置处理器、适配器、映射器的方式二：手动配置     end-->
 
 <!-- 配置视图解析器 	InternalResourceViewResolver-->
 <!-- InternalResourceViewResolver：支持JSP视图解析   ;  prefix 和suffix：查找视图页面的前缀和后缀，最终视图的址为：
