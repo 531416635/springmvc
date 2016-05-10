@@ -11,6 +11,8 @@
 </head>
 <body>
 	<h1>Hello world!</h1>
-	<a href="<%=path %>/items1.action">查询商品列表</a>
+	<h3><a href="<%=path %>/items1name.action">查询商品列表BeanNameUrlHandlerMapping	SimpleControllerHandlerAdapter</a></h3>
+	<h3><a href="<%=path %>/items1.action">查询商品列表simpleUrlHandlerMapping	SimpleControllerHandlerAdapter</a></h3>
+	<h3><a href="<%=path %>/items2.action">查询商品列表simpleUrlHandlerMapping	HttpRequestHandlerAdapter</a></h3>
 </body>
 </html>

@@ -16,20 +16,38 @@
 <!-- 处理器配置,即controller配置 -->
 <!-- name="/items1.action"：前边配置的处理器映射器为BeanNameUrlHandlerMapping，
 如果请求的URL 为“上下文/items1.action”将会成功映射到ItemList1控制器。 -->
-<bean name="/items1.action" id="itemList1" 
-class="com.yao.controller.ItemList1"/>	
+<bean name="/items1name.action" id="itemList1" class="com.yao.controller.ItemList1"/>	
+<bean id="itemList2" class="com.yao.controller.ItemList2"/>	
 
-<!-- 处理器适配器 -->
+<!-- 处理器适配器 	SimpleControllerHandlerAdapter-->
 <!-- SimpleControllerHandlerAdapter：即简单控制器处理器适配器，
 所有实现了org.springframework.web.servlet.mvc.Controller 接口的Bean作为Springmvc的后端控制器。 -->
 <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/> 
 
-<!-- 处理器映射器 -->
+<!-- 处理器适配器 	HttpRequestHandlerAdapter-->
+<!-- HttpRequestHandlerAdapter，http请求处理器适配器，
+所有实现了org.springframework.web.HttpRequestHandler 接口的Bean通过此适配器进行适配、执行。 -->
+<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
+
+<!-- 处理器映射器   	BeanNameUrlHandlerMapping-->
 <!-- BeanNameUrlHandlerMapping：表示将定义的Bean名字作为请求的url，
 需要将编写的controller在spring容器中进行配置，且指定bean的name为请求的url，且必须以.action结尾 -->
 <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
 
-<!-- 配置视图解析器 -->
+<!-- 处理器映射器 	simpleUrlHandlerMapping-->
+<!--simpleUrlHandlerMapping是BeanNameUrlHandlerMapping的增强版本，它可以将url和处理器bean的id进行统一映射配置。  -->
+<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	<property name="mappings">
+		<props>
+			<!-- <prop key="/items1.action">controller的bean id</prop> -->
+			<prop key="/items1.action">itemList1</prop>
+			<prop key="/items2.action">itemList2</prop>
+		</props>
+	</property>
+</bean>
+
+
+<!-- 配置视图解析器 	InternalResourceViewResolver-->
 <!-- InternalResourceViewResolver：支持JSP视图解析   ;  prefix 和suffix：查找视图页面的前缀和后缀，最终视图的址为：
 前缀+逻辑视图名+后缀，逻辑视图名需要在controller中返回ModelAndView指定，比如逻辑视图名为hello，则最终返回的jsp视图地址 “WEB-INF/jsp/hello.jsp” -->
 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
